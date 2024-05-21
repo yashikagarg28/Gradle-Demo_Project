@@ -21,7 +21,6 @@ public class Negative {
         driver = new ChromeDriver();
         driver.manage().window().maximize();
         driver.get(url);
-        System.out.println("Hello World1");
     }
     @When("Enter  username as {string} and password as {string}")
     public void enterUsernameAndPassword(String username, String password) {
@@ -81,13 +80,13 @@ public class Negative {
     public void cickssubmitbutton()
     {
         driver.findElement(By.cssSelector("[value='Submit']")).click();
+        System.out.println("Hello");
 
     }
     @And("Gets a prompt message")
-    public void Getsapromptmessage()
-    {
-        String msg=driver.switchTo().alert().getText();
-        Assert.assertEquals("Please fill all fields",msg);
+    public void Getsapromptmessage() {
+        String msg = driver.switchTo().alert().getText();
+        Assert.assertEquals("Please fill all fields", msg);
         driver.switchTo().alert().accept();
         driver.manage().deleteAllCookies();
         driver.quit();
