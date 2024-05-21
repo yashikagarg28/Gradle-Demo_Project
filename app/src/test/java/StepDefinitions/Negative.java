@@ -21,6 +21,7 @@ public class Negative {
         driver = new ChromeDriver();
         driver.manage().window().maximize();
         driver.get(url);
+        System.out.println("Hello World");
     }
     @When("Enter  username as {string} and password as {string}")
     public void enterUsernameAndPassword(String username, String password) {
@@ -48,6 +49,8 @@ public class Negative {
 
         // Accept the alert (click OK)
         alert.accept();
+        driver.manage().deleteAllCookies();
+
     }
     @And("User click on the edit option")
     public void userClickOnTheEditOption() throws InterruptedException {
@@ -62,25 +65,33 @@ public class Negative {
     @Then("User should able to see the error message to update correct values")
     public void userShouldAbleToSeeTheErrorMessageToUpdateCorrectValues() {
         Assert.assertEquals("Characters are not allowed",driver.findElement(By.xpath("//label[@id='message2']")).getText());
+        driver.manage().deleteAllCookies();
         driver.quit();
+
+
     }
     @And("user clicks on delete button")
     public void userclicksondeletebutton()
     {
-        driver.findElement(By.xpath("//a[normalize-space()='Delete Customer']")).click();
-        driver.findElement(By.cssSelector("input[name='cusid']")).sendKeys("68916");
+
+        driver.findElement(By.cssSelector(".menusubnav>li:nth-of-type(6)>a")).click();
+
     }
     @And("clicks submit button")
     public void cickssubmitbutton()
     {
-        driver.findElement(By.xpath("//input[@name='AccSubmit']")).click();
+        driver.findElement(By.cssSelector("[value='Submit']")).click();
+
     }
     @And("Gets a prompt message")
     public void Getsapromptmessage()
     {
-        Alert alert = driver.switchTo().alert();
-        alert.accept();
+        String msg=driver.switchTo().alert().getText();
+        Assert.assertEquals("Please fill all fields",msg);
+        driver.switchTo().alert().accept();
+        driver.manage().deleteAllCookies();
         driver.quit();
+
     }
     }
 
